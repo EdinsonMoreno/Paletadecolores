@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Selector de Colores — Elige tu paleta</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=Inter:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&family=Cormorant+Garamond:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&family=Raleway:wght@400;600;700&family=Open+Sans:wght@300;400;600&family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;700&family=Libre+Baskerville:wght@400;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=Raleway:wght@400;600;700&family=Open+Sans:wght@300;400;600&family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;700&family=Nunito:wght@300;400;600;700&family=Cinzel:wght@400;600;700&family=Bebas+Neue&family=Abril+Fatface&family=Josefin+Sans:wght@400;600;700&family=Pacifico&family=Satisfy&family=Lobster&family=Righteous&family=Comfortaa:wght@400;600;700&family=Philosopher:wght@400;700&family=Merriweather:wght@400;700&family=Lora:wght@400;600;700&family=Nunito+Sans:wght@300;400;600&family=Poppins:wght@400;600;700&family=Source+Serif+4:wght@400;600;700&family=Fraunces:wght@400;700&family=Syne:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Bitter:wght@400;600;700&family=Crimson+Text:wght@400;600;700&family=PT+Sans:wght@400;700&family=Noto+Sans:wght@400;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=Mulish:wght@300;400;600&family=Cabin:wght@400;600;700&family=Karla:wght@400;600;700&family=Quattrocento+Sans:wght@400;700&family=Dancing+Script:wght@400;600;700&family=Great+Vibes&family=Sacramento&family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Permanent+Marker&family=Indie+Flower&family=Shadows+Into+Light&family=Amatic+SC:wght@400;700&family=Pinyon+Script&family=Marck+Script&family=Alex+Brush&family=Cookie&family=Figtree:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&family=Rubik:wght@400;500;600;700&family=Jost:wght@300;400;500;600&family=Urbanist:wght@300;400;500;600;700&family=Lexend:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #F7F5F2;
@@ -322,125 +322,208 @@
   .typo-panel { display: none; }
   .typo-panel.active { display: block; }
 
-  .typo-intro {
+  /* Progress bar */
+  .typo-progress-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 20px;
+  }
+
+  .typo-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .typo-progress-label {
     font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .typo-progress-sub {
+    font-size: 12px;
     color: var(--text2);
-    margin-bottom: 16px;
-    line-height: 1.5;
   }
 
-  .typo-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+  .typo-progress-track {
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
   }
 
-  .typo-card {
+  .typo-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #7B5CF0);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  /* Role sections */
+  .typo-role-section {
     background: var(--surface);
     border: 1.5px solid var(--border);
     border-radius: var(--radius);
-    padding: 20px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .typo-role-section.role-complete {
+    border-color: rgba(45,107,228,0.35);
+  }
+
+  .typo-role-header {
+    padding: 14px 18px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .typo-role-info {
+    flex: 1;
+  }
+
+  .typo-role-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+
+  .typo-role-optional {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: var(--surface2);
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .typo-role-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.4;
+  }
+
+  .typo-role-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: var(--surface2);
+    color: var(--text3);
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .typo-role-badge.selected-badge {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(45,107,228,0.25);
+  }
+
+  .typo-role-badge svg {
+    flex-shrink: 0;
+  }
+
+  /* Font cards grid */
+  .typo-fonts-grid {
+    padding: 14px 14px 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+  }
+
+  .font-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 12px 10px;
     cursor: pointer;
-    transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
     position: relative;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
   }
 
-  .typo-card:hover {
+  .font-card:hover {
     border-color: #C5C0BA;
     box-shadow: var(--shadow);
-    transform: translateY(-1px);
   }
 
-  .typo-card.selected {
+  .font-card.selected {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(45, 107, 228, 0.12);
+    background: var(--accent-light);
+    box-shadow: 0 0 0 2px rgba(45,107,228,0.12);
   }
 
-  .typo-card-check {
+  .font-card-check {
     position: absolute;
-    top: 10px; right: 10px;
-    width: 20px; height: 20px;
+    top: 7px; right: 7px;
+    width: 18px; height: 18px;
     border-radius: 50%;
     background: var(--accent);
     display: none;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    z-index: 2;
   }
 
-  .typo-card.selected .typo-card-check { display: flex; }
+  .font-card.selected .font-card-check { display: flex; }
 
-  .typo-card-check svg { width: 11px; height: 11px; }
+  .font-card-check svg { width: 10px; height: 10px; }
 
-  .typo-style-badge {
-    display: inline-block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 20px;
-    background: var(--surface2);
-    color: var(--text2);
-    margin-bottom: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .typo-card.selected .typo-style-badge {
-    background: var(--accent-light);
-    color: var(--accent);
-  }
-
-  .typo-preview-heading {
-    line-height: 1.15;
-    margin-bottom: 6px;
+  .font-card-preview {
+    line-height: 1.1;
     word-break: break-word;
-    color: var(--text);
-  }
-
-  .typo-preview-body {
-    line-height: 1.5;
-    color: var(--text2);
-    margin-bottom: 16px;
-  }
-
-  .typo-meta {
-    border-top: 1px solid var(--border);
-    padding-top: 12px;
+    overflow: hidden;
+    flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 3px;
+    align-items: flex-end;
+    padding-bottom: 2px;
   }
 
-  .typo-pair-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-
-  .typo-font-detail {
+  .font-card-name {
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
+    font-size: 9.5px;
     color: var(--text3);
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
-
-  .typo-font-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    padding: 1px 5px;
-    border-radius: 3px;
-    background: var(--surface2);
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    margin-top: 7px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     flex-shrink: 0;
+  }
+
+  .font-card.selected .font-card-name {
+    color: var(--accent);
   }
 
   /* ─── BOTTOM BAR TYPOGRAPHY PREVIEW ───────────────────── */
@@ -460,6 +543,7 @@
     align-items: center;
     gap: 8px;
     flex-shrink: 0;
+    max-width: 260px;
   }
 
   .bar-typo-preview.visible { display: flex; }
@@ -478,20 +562,27 @@
   .bar-typo-text {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   .bar-typo-name {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--text);
     line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .bar-typo-fonts {
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
+    font-size: 9px;
     color: var(--text3);
     line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* BOTTOM BAR */
@@ -604,10 +695,12 @@
     background: var(--surface);
     border-radius: 16px;
     padding: 28px;
-    max-width: 480px;
+    max-width: 520px;
     width: 100%;
     box-shadow: var(--shadow-lg);
     animation: modalIn 0.2s ease;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
   @keyframes modalIn {
@@ -632,7 +725,7 @@
     flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
-    max-height: 280px;
+    max-height: 220px;
     overflow-y: auto;
   }
 
@@ -699,20 +792,44 @@
     margin-bottom: 10px;
   }
 
-  .modal-typo-pair-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .modal-typo-detail {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--text2);
+  .modal-typo-roles {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 6px;
+  }
+
+  .modal-typo-role-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 12.5px;
+  }
+
+  .modal-typo-role-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: var(--surface2);
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+    min-width: 72px;
+    text-align: center;
+  }
+
+  .modal-typo-role-value {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .modal-typo-role-empty {
+    font-size: 12px;
+    color: var(--text3);
+    font-style: italic;
   }
 
   .modal-note {
@@ -796,7 +913,16 @@
     .guide-banner { gap: 12px; }
     .client-input-wrap input { width: 150px; }
     .color-grid { grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); }
-    .typo-grid { grid-template-columns: 1fr; }
+    .typo-fonts-grid {
+      grid-template-columns: repeat(2, 1fr);
+      overflow-x: hidden;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .typo-fonts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
 </head>
@@ -928,7 +1054,6 @@ function brightness(hex) {
   return 0.299*r + 0.587*g + 0.114*b;
 }
 
-// Generate palette grids
 function genVibrant() {
   const colors = [];
   for (let row = 0; row < 12; row++) {
@@ -1016,159 +1141,151 @@ function genNeon() {
 }
 
 const PALETTES = [
-  {
-    id: 'vibrant',
-    name: 'Vibrantes',
-    emoji: '🎨',
-    dotColor: '#E43D2D',
-    desc: 'Colores saturados y llenos de energía',
-    colors: genVibrant()
-  },
-  {
-    id: 'pastel',
-    name: 'Pastel',
-    emoji: '🌸',
-    dotColor: '#F4A7C3',
-    desc: 'Tonos suaves, delicados y elegantes',
-    colors: genPastel()
-  },
-  {
-    id: 'neutral',
-    name: 'Neutros & Tierra',
-    emoji: '🌿',
-    dotColor: '#B5906A',
-    desc: 'Beiges, cremas, terracota y cafés',
-    colors: genNeutral()
-  },
-  {
-    id: 'grays',
-    name: 'Grises',
-    emoji: '◻️',
-    dotColor: '#9E9892',
-    desc: 'Escala de grises, cálidos y fríos',
-    colors: genGrays()
-  },
-  {
-    id: 'dark',
-    name: 'Oscuros',
-    emoji: '🌙',
-    dotColor: '#2D3A6B',
-    desc: 'Navy, vino, verde botella, tonos profundos',
-    colors: genDark()
-  },
-  {
-    id: 'neon',
-    name: 'Neón',
-    emoji: '⚡',
-    dotColor: '#00E5FF',
-    desc: 'Vibrantes y llamativos para impacto visual',
-    colors: genNeon()
-  }
+  { id: 'vibrant', name: 'Vibrantes', dotColor: '#E43D2D', colors: genVibrant() },
+  { id: 'pastel',  name: 'Pastel',    dotColor: '#F4A7C3', colors: genPastel()  },
+  { id: 'neutral', name: 'Neutros & Tierra', dotColor: '#B5906A', colors: genNeutral() },
+  { id: 'grays',   name: 'Grises',    dotColor: '#9E9892', colors: genGrays()  },
+  { id: 'dark',    name: 'Oscuros',   dotColor: '#2D3A6B', colors: genDark()   },
+  { id: 'neon',    name: 'Neón',      dotColor: '#00E5FF', colors: genNeon()   }
 ];
 
-// ─── TYPOGRAPHY PAIRS ────────────────────────────────────────────────────────
-const TYPO_PAIRS = [
+// ─── TYPOGRAPHY ROLES ────────────────────────────────────────────────────────
+const TYPO_ROLES = [
   {
-    id: 'moderna-limpia',
-    name: 'Moderna & Limpia',
-    headingFont: 'Inter',
-    bodyFont: 'Inter',
-    headingWeight: '700',
-    bodyWeight: '400',
-    headingSize: '30px',
-    bodySize: '14px',
-    style: 'Moderno',
-    bodyExample: 'Bisutería artesanal · Desde 2024'
+    id: 'logo',
+    name: 'Logo / Marca',
+    desc: 'La fuente principal de tu nombre de marca. La más importante.',
+    required: true,
+    previewType: 'logo',  // uses client name
+    exampleText: 'Tu Marca',
+    previewSize: '28px',
+    previewWeight: '600',
+    fonts: [
+      { name: 'Playfair Display', stack: "'Playfair Display', serif" },
+      { name: 'Cormorant Garamond', stack: "'Cormorant Garamond', serif" },
+      { name: 'Cinzel', stack: "'Cinzel', serif" },
+      { name: 'Bebas Neue', stack: "'Bebas Neue', cursive" },
+      { name: 'Abril Fatface', stack: "'Abril Fatface', cursive" },
+      { name: 'Josefin Sans', stack: "'Josefin Sans', sans-serif" },
+      { name: 'Pacifico', stack: "'Pacifico', cursive" },
+      { name: 'Satisfy', stack: "'Satisfy', cursive" },
+      { name: 'Lobster', stack: "'Lobster', cursive" },
+      { name: 'Raleway', stack: "'Raleway', sans-serif" },
+      { name: 'Righteous', stack: "'Righteous', cursive" },
+      { name: 'Comfortaa', stack: "'Comfortaa', cursive" },
+      { name: 'Philosopher', stack: "'Philosopher', serif" },
+      { name: 'Oswald', stack: "'Oswald', sans-serif" }
+    ]
   },
   {
-    id: 'elegante-serif',
-    name: 'Elegante & Serif',
-    headingFont: 'Playfair Display',
-    bodyFont: 'Lato',
-    headingWeight: '700',
-    bodyWeight: '400',
-    headingSize: '28px',
-    bodySize: '14px',
-    style: 'Elegante',
-    bodyExample: 'Bisutería artesanal · Desde 2024'
+    id: 'titulos',
+    name: 'Títulos',
+    desc: 'Para encabezados grandes en web, catálogos y materiales.',
+    required: true,
+    previewType: 'heading',
+    exampleText: 'Diseño que transforma marcas',
+    previewSize: '20px',
+    previewWeight: '700',
+    fonts: [
+      { name: 'Montserrat', stack: "'Montserrat', sans-serif" },
+      { name: 'Inter', stack: "'Inter', sans-serif" },
+      { name: 'Raleway', stack: "'Raleway', sans-serif" },
+      { name: 'DM Serif Display', stack: "'DM Serif Display', serif" },
+      { name: 'Merriweather', stack: "'Merriweather', serif" },
+      { name: 'Lora', stack: "'Lora', serif" },
+      { name: 'Nunito', stack: "'Nunito', sans-serif" },
+      { name: 'Poppins', stack: "'Poppins', sans-serif" },
+      { name: 'Source Serif 4', stack: "'Source Serif 4', serif" },
+      { name: 'Fraunces', stack: "'Fraunces', serif" },
+      { name: 'Syne', stack: "'Syne', sans-serif" },
+      { name: 'Space Grotesk', stack: "'Space Grotesk', sans-serif" },
+      { name: 'Bitter', stack: "'Bitter', serif" },
+      { name: 'Crimson Text', stack: "'Crimson Text', serif" }
+    ]
   },
   {
-    id: 'geometrica',
-    name: 'Geométrica',
-    headingFont: 'Montserrat',
-    bodyFont: 'Montserrat',
-    headingWeight: '700',
-    bodyWeight: '400',
-    headingSize: '28px',
-    bodySize: '14px',
-    style: 'Moderno',
-    bodyExample: 'Bisutería artesanal · Desde 2024'
+    id: 'cuerpo',
+    name: 'Cuerpo de texto',
+    desc: 'Para párrafos, descripciones de productos, textos largos.',
+    required: true,
+    previewType: 'body',
+    exampleText: 'Cada detalle cuenta en la construcción de una identidad visual sólida y memorable.',
+    previewSize: '12px',
+    previewWeight: '400',
+    fonts: [
+      { name: 'Open Sans', stack: "'Open Sans', sans-serif" },
+      { name: 'Lato', stack: "'Lato', sans-serif" },
+      { name: 'Roboto', stack: "'Roboto', sans-serif" },
+      { name: 'Source Sans 3', stack: "'Source Sans 3', sans-serif" },
+      { name: 'Nunito Sans', stack: "'Nunito Sans', sans-serif" },
+      { name: 'PT Sans', stack: "'PT Sans', sans-serif" },
+      { name: 'Noto Sans', stack: "'Noto Sans', sans-serif" },
+      { name: 'Work Sans', stack: "'Work Sans', sans-serif" },
+      { name: 'IBM Plex Sans', stack: "'IBM Plex Sans', sans-serif" },
+      { name: 'Mulish', stack: "'Mulish', sans-serif" },
+      { name: 'Cabin', stack: "'Cabin', sans-serif" },
+      { name: 'Karla', stack: "'Karla', sans-serif" },
+      { name: 'Quattrocento Sans', stack: "'Quattrocento Sans', sans-serif" },
+      { name: 'DM Sans', stack: "'DM Sans', sans-serif" }
+    ]
   },
   {
-    id: 'editorial',
-    name: 'Editorial',
-    headingFont: 'Cormorant Garamond',
-    bodyFont: 'Source Sans 3',
-    headingWeight: '700',
-    bodyWeight: '400',
-    headingSize: '32px',
-    bodySize: '14px',
-    style: 'Clásico',
-    bodyExample: 'Bisutería artesanal · Desde 2024'
+    id: 'acento',
+    name: 'Acento / Display',
+    desc: 'Fuente especial para frases destacadas, citas, taglines.',
+    required: false,
+    previewType: 'accent',
+    exampleText: 'Hecho con pasión',
+    previewSize: '22px',
+    previewWeight: '400',
+    fonts: [
+      { name: 'Dancing Script', stack: "'Dancing Script', cursive" },
+      { name: 'Great Vibes', stack: "'Great Vibes', cursive" },
+      { name: 'Sacramento', stack: "'Sacramento', cursive" },
+      { name: 'Pacifico', stack: "'Pacifico', cursive" },
+      { name: 'Caveat', stack: "'Caveat', cursive" },
+      { name: 'Kalam', stack: "'Kalam', cursive" },
+      { name: 'Permanent Marker', stack: "'Permanent Marker', cursive" },
+      { name: 'Indie Flower', stack: "'Indie Flower', cursive" },
+      { name: 'Shadows Into Light', stack: "'Shadows Into Light', cursive" },
+      { name: 'Amatic SC', stack: "'Amatic SC', cursive" },
+      { name: 'Pinyon Script', stack: "'Pinyon Script', cursive" },
+      { name: 'Marck Script', stack: "'Marck Script', cursive" },
+      { name: 'Alex Brush', stack: "'Alex Brush', cursive" },
+      { name: 'Cookie', stack: "'Cookie', cursive" }
+    ]
   },
   {
-    id: 'humanista',
-    name: 'Humanista',
-    headingFont: 'Raleway',
-    bodyFont: 'Open Sans',
-    headingWeight: '700',
-    bodyWeight: '400',
-    headingSize: '28px',
-    bodySize: '14px',
-    style: 'Amigable',
-    bodyExample: 'Bisutería artesanal · Desde 2024'
-  },
-  {
-    id: 'bold-clean',
-    name: 'Bold & Clean',
-    headingFont: 'Oswald',
-    bodyFont: 'Roboto',
-    headingWeight: '700',
-    bodyWeight: '400',
-    headingSize: '30px',
-    bodySize: '14px',
-    style: 'Fuerte',
-    bodyExample: 'Bisutería artesanal · Desde 2024'
-  },
-  {
-    id: 'artesanal',
-    name: 'Artesanal',
-    headingFont: 'Libre Baskerville',
-    bodyFont: 'Nunito',
-    headingWeight: '700',
-    bodyWeight: '400',
-    headingSize: '26px',
-    bodySize: '14px',
-    style: 'Clásico',
-    bodyExample: 'Bisutería artesanal · Desde 2024'
-  },
-  {
-    id: 'contemporanea',
-    name: 'Contemporánea',
-    headingFont: 'DM Serif Display',
-    bodyFont: 'DM Sans',
-    headingWeight: '400',
-    bodyWeight: '400',
-    headingSize: '30px',
-    bodySize: '14px',
-    style: 'Minimalista',
-    bodyExample: 'Bisutería artesanal · Desde 2024'
+    id: 'ui',
+    name: 'Interfaz / UI',
+    desc: 'Para botones, etiquetas, menús.',
+    required: false,
+    previewType: 'ui',
+    exampleText: 'Ver colección · Contactar · Inicio',
+    previewSize: '13px',
+    previewWeight: '500',
+    fonts: [
+      { name: 'Inter', stack: "'Inter', sans-serif" },
+      { name: 'Roboto', stack: "'Roboto', sans-serif" },
+      { name: 'DM Sans', stack: "'DM Sans', sans-serif" },
+      { name: 'IBM Plex Sans', stack: "'IBM Plex Sans', sans-serif" },
+      { name: 'Figtree', stack: "'Figtree', sans-serif" },
+      { name: 'Plus Jakarta Sans', stack: "'Plus Jakarta Sans', sans-serif" },
+      { name: 'Manrope', stack: "'Manrope', sans-serif" },
+      { name: 'Outfit', stack: "'Outfit', sans-serif" },
+      { name: 'Be Vietnam Pro', stack: "'Be Vietnam Pro', sans-serif" },
+      { name: 'Rubik', stack: "'Rubik', sans-serif" },
+      { name: 'Jost', stack: "'Jost', sans-serif" },
+      { name: 'Urbanist', stack: "'Urbanist', sans-serif" },
+      { name: 'Lexend', stack: "'Lexend', sans-serif" },
+      { name: 'Nunito', stack: "'Nunito', sans-serif" }
+    ]
   }
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let selected = {}; // hex → paletteName
-let selectedTypo = null; // id of selected typo pair
+let selectedFonts = {}; // roleId → fontName
 let activeTab = 0;
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
@@ -1177,14 +1294,12 @@ function init() {
   const mainEl = document.getElementById('mainContent');
 
   PALETTES.forEach((pal, i) => {
-    // Tab
     const tab = document.createElement('button');
     tab.className = 'tab' + (i === 0 ? ' active' : '');
     tab.innerHTML = `<span class="tab-dot" style="background:${pal.dotColor}"></span>${pal.name}`;
     tab.onclick = () => switchTab(i);
     tabsEl.appendChild(tab);
 
-    // Panel
     const panel = document.createElement('div');
     panel.className = 'palette-panel' + (i === 0 ? ' active' : '');
     panel.id = 'panel-' + pal.id;
@@ -1218,7 +1333,7 @@ function init() {
   sep.className = 'tab-separator';
   tabsEl.appendChild(sep);
 
-  // Typography tab (index = PALETTES.length)
+  // Typography tab
   const typoTabIndex = PALETTES.length;
   const typoTab = document.createElement('button');
   typoTab.className = 'tab';
@@ -1230,75 +1345,128 @@ function init() {
   const typoPanel = document.createElement('div');
   typoPanel.className = 'typo-panel';
   typoPanel.id = 'panel-typo';
-
-  const typoIntro = document.createElement('p');
-  typoIntro.className = 'typo-intro';
-  typoIntro.textContent = 'Elegí un par de tipografías para tu identidad visual. Cada combinación incluye una fuente para títulos y otra para el cuerpo del texto.';
-
-  const typoGrid = document.createElement('div');
-  typoGrid.className = 'typo-grid';
-  typoGrid.id = 'typoGrid';
-
-  TYPO_PAIRS.forEach(pair => {
-    const card = buildTypoCard(pair);
-    typoGrid.appendChild(card);
-  });
-
-  typoPanel.appendChild(typoIntro);
-  typoPanel.appendChild(typoGrid);
+  typoPanel.appendChild(buildTypoPanel());
   mainEl.appendChild(typoPanel);
 
-  // Listen to client name input → update typo previews
-  document.getElementById('clientName').addEventListener('input', updateTypoPreviews);
+  document.getElementById('clientName').addEventListener('input', updateLogoPreview);
 }
 
-function buildTypoCard(pair) {
+function buildTypoPanel() {
+  const wrap = document.createElement('div');
+
+  // Progress bar
+  const progWrap = document.createElement('div');
+  progWrap.className = 'typo-progress-wrap';
+  progWrap.id = 'typoProgressWrap';
+  progWrap.innerHTML = `
+    <div class="typo-progress-header">
+      <span class="typo-progress-label" id="typoProgressLabel">0 de 3 roles obligatorios completados</span>
+      <span class="typo-progress-sub" id="typoProgressSub">Elige una fuente para Logo, Títulos y Cuerpo</span>
+    </div>
+    <div class="typo-progress-track">
+      <div class="typo-progress-fill" id="typoProgressFill"></div>
+    </div>
+  `;
+  wrap.appendChild(progWrap);
+
+  // Role sections
+  TYPO_ROLES.forEach(role => {
+    const section = buildRoleSection(role);
+    wrap.appendChild(section);
+  });
+
+  return wrap;
+}
+
+function buildRoleSection(role) {
+  const section = document.createElement('div');
+  section.className = 'typo-role-section';
+  section.id = 'role-section-' + role.id;
+
+  // Header
+  const header = document.createElement('div');
+  header.className = 'typo-role-header';
+
+  const info = document.createElement('div');
+  info.className = 'typo-role-info';
+
+  const nameRow = document.createElement('div');
+  nameRow.className = 'typo-role-name';
+  nameRow.textContent = role.name;
+  if (!role.required) {
+    const optBadge = document.createElement('span');
+    optBadge.className = 'typo-role-optional';
+    optBadge.textContent = 'Opcional';
+    nameRow.appendChild(optBadge);
+  }
+
+  const desc = document.createElement('div');
+  desc.className = 'typo-role-desc';
+  desc.textContent = role.desc;
+
+  info.appendChild(nameRow);
+  info.appendChild(desc);
+
+  const badge = document.createElement('div');
+  badge.className = 'typo-role-badge';
+  badge.id = 'role-badge-' + role.id;
+  badge.innerHTML = `
+    <svg width="12" height="12" fill="none" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    Sin seleccionar
+  `;
+
+  header.appendChild(info);
+  header.appendChild(badge);
+  section.appendChild(header);
+
+  // Font cards grid
+  const grid = document.createElement('div');
+  grid.className = 'typo-fonts-grid';
+
+  role.fonts.forEach(font => {
+    const card = buildFontCard(role, font);
+    grid.appendChild(card);
+  });
+
+  section.appendChild(grid);
+  return section;
+}
+
+function buildFontCard(role, font) {
   const card = document.createElement('div');
-  card.className = 'typo-card';
-  card.id = 'typo-card-' + pair.id;
-  card.dataset.typoId = pair.id;
+  card.className = 'font-card';
+  card.dataset.roleId = role.id;
+  card.dataset.fontName = font.name;
+  card.id = 'font-card-' + role.id + '-' + font.name.replace(/\s+/g, '-');
 
   const clientName = document.getElementById('clientName').value.trim();
-  const previewText = clientName || 'Tu Marca';
+  const isLogo = role.previewType === 'logo';
+  const previewText = isLogo ? (clientName || role.exampleText) : role.exampleText;
 
   card.innerHTML = `
-    <div class="typo-card-check">
+    <div class="font-card-check">
       <svg viewBox="0 0 12 12" fill="none">
         <polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    <span class="typo-style-badge">${pair.style}</span>
-    <div class="typo-preview-heading" style="font-family:'${pair.headingFont}',serif;font-size:${pair.headingSize};font-weight:${pair.headingWeight};" data-preview-heading>${previewText}</div>
-    <div class="typo-preview-body" style="font-family:'${pair.bodyFont}',sans-serif;font-size:${pair.bodySize};font-weight:${pair.bodyWeight};" data-preview-body>${pair.bodyExample}</div>
-    <div class="typo-meta">
-      <div class="typo-pair-name">${pair.name}</div>
-      <div class="typo-font-detail">
-        <span class="typo-font-label">Títulos</span>
-        ${pair.headingFont}
-      </div>
-      <div class="typo-font-detail">
-        <span class="typo-font-label">Cuerpo</span>
-        ${pair.bodyFont}
-      </div>
-    </div>
+    <div class="font-card-preview" style="font-family:${font.stack};font-size:${role.previewSize};font-weight:${role.previewWeight};line-height:1.2;"${isLogo ? ' data-logo-preview' : ''}>${previewText}</div>
+    <div class="font-card-name">${font.name}</div>
   `;
 
-  card.onclick = () => selectTypo(pair.id);
+  card.onclick = () => selectFont(role.id, font.name);
   return card;
 }
 
 function switchTab(i) {
   activeTab = i;
-  const totalTabs = PALETTES.length + 1; // +1 for typo tab
 
-  // Update tab buttons (skip the separator element)
   const tabButtons = document.querySelectorAll('.tab');
   tabButtons.forEach((t, idx) => t.classList.toggle('active', idx === i));
 
-  // Update color panels
   document.querySelectorAll('.palette-panel').forEach((p, idx) => p.classList.toggle('active', idx === i));
 
-  // Update typo panel (shown when i === PALETTES.length)
   const typoPanel = document.getElementById('panel-typo');
   if (typoPanel) {
     typoPanel.classList.toggle('active', i === PALETTES.length);
@@ -1306,21 +1474,81 @@ function switchTab(i) {
 }
 
 // ─── TYPOGRAPHY SELECTION ────────────────────────────────────────────────────
-function selectTypo(id) {
-  selectedTypo = (selectedTypo === id) ? null : id;
+function selectFont(roleId, fontName) {
+  // Toggle: clicking same font deselects
+  if (selectedFonts[roleId] === fontName) {
+    delete selectedFonts[roleId];
+  } else {
+    selectedFonts[roleId] = fontName;
+  }
 
-  document.querySelectorAll('.typo-card').forEach(card => {
-    card.classList.toggle('selected', card.dataset.typoId === selectedTypo);
+  // Update card states for this role
+  document.querySelectorAll('.font-card[data-role-id="' + roleId + '"]').forEach(card => {
+    card.classList.toggle('selected', card.dataset.fontName === selectedFonts[roleId]);
   });
 
+  // Update role section badge
+  updateRoleBadge(roleId);
+  // Update role section border
+  const section = document.getElementById('role-section-' + roleId);
+  if (section) section.classList.toggle('role-complete', !!selectedFonts[roleId]);
+
+  updateTypoProgress();
   updateBar();
 }
 
-function updateTypoPreviews() {
+function updateRoleBadge(roleId) {
+  const badge = document.getElementById('role-badge-' + roleId);
+  if (!badge) return;
+  const selected = selectedFonts[roleId];
+  if (selected) {
+    badge.className = 'typo-role-badge selected-badge';
+    badge.innerHTML = `
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      ${selected}
+    `;
+  } else {
+    badge.className = 'typo-role-badge';
+    badge.innerHTML = `
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      Sin seleccionar
+    `;
+  }
+}
+
+function updateTypoProgress() {
+  const requiredRoles = TYPO_ROLES.filter(r => r.required);
+  const completedRequired = requiredRoles.filter(r => selectedFonts[r.id]).length;
+  const totalRequired = requiredRoles.length;
+
+  const fill = document.getElementById('typoProgressFill');
+  const label = document.getElementById('typoProgressLabel');
+  const sub = document.getElementById('typoProgressSub');
+
+  if (fill) fill.style.width = (completedRequired / totalRequired * 100) + '%';
+
+  if (label) {
+    label.textContent = completedRequired + ' de ' + totalRequired + ' roles obligatorios completados';
+  }
+
+  if (sub) {
+    if (completedRequired === totalRequired) {
+      sub.textContent = 'Roles obligatorios listos. Puedes agregar opcionales o enviar.';
+    } else {
+      const pending = requiredRoles.filter(r => !selectedFonts[r.id]).map(r => r.name).join(', ');
+      sub.textContent = 'Pendiente: ' + pending;
+    }
+  }
+}
+
+function updateLogoPreview() {
   const clientName = document.getElementById('clientName').value.trim();
   const previewText = clientName || 'Tu Marca';
-
-  document.querySelectorAll('[data-preview-heading]').forEach(el => {
+  document.querySelectorAll('[data-logo-preview]').forEach(el => {
     el.textContent = previewText;
   });
 }
@@ -1342,15 +1570,22 @@ function toggleColor(hex, palName, cell) {
 function updateBar() {
   const keys = Object.keys(selected);
   const count = keys.length;
-  const hasTypo = selectedTypo !== null;
 
-  // Warning
+  const requiredRoles = TYPO_ROLES.filter(r => r.required);
+  const completedRequired = requiredRoles.filter(r => selectedFonts[r.id]).length;
+  const totalRequired = requiredRoles.length;
+  const hasRequiredTypo = completedRequired === totalRequired;
+  const hasAnyTypo = Object.keys(selectedFonts).length > 0;
+
+  // Warning for too many colors
   document.getElementById('warningBar').classList.toggle('visible', count > 3);
 
   // Swatches
   const swatchesEl = document.getElementById('selectedSwatches');
-  if (count === 0) {
-    swatchesEl.innerHTML = '<span class="swatch-empty">' + (hasTypo ? 'Sin colores' : 'Ningún color seleccionado aún') + '</span>';
+  if (count === 0 && !hasAnyTypo) {
+    swatchesEl.innerHTML = '<span class="swatch-empty">Ningún color seleccionado aún</span>';
+  } else if (count === 0) {
+    swatchesEl.innerHTML = '<span class="swatch-empty">Sin colores</span>';
   } else {
     swatchesEl.innerHTML = keys.map(hex => `
       <div class="swatch-preview" style="background:${hex}" title="${hex} — Clic para deseleccionar" onclick="removeColor('${hex}')">
@@ -1359,24 +1594,27 @@ function updateBar() {
     `).join('');
   }
 
-  // Typography in bottom bar
+  // Typography summary in bottom bar
   const divider = document.getElementById('barTypoDivider');
   const typoPreview = document.getElementById('barTypoPreview');
 
-  if (hasTypo) {
-    const pair = TYPO_PAIRS.find(p => p.id === selectedTypo);
+  if (hasAnyTypo) {
     divider.classList.add('visible');
     typoPreview.classList.add('visible');
-    document.getElementById('barTypoName').textContent = pair.name;
-    document.getElementById('barTypoFonts').textContent = pair.headingFont + ' + ' + pair.bodyFont;
+
+    const rolesCompleted = TYPO_ROLES.filter(r => selectedFonts[r.id]);
+    document.getElementById('barTypoName').textContent =
+      completedRequired + '/' + totalRequired + ' roles obligatorios';
+    document.getElementById('barTypoFonts').textContent =
+      rolesCompleted.map(r => selectedFonts[r.id]).join(' · ');
   } else {
     divider.classList.remove('visible');
     typoPreview.classList.remove('visible');
   }
 
-  // Send button — enabled if colors OR typo selected
+  // Send button — enabled if colors OR required typo roles complete
   const btn = document.getElementById('sendBtn');
-  btn.disabled = (count === 0 && !hasTypo);
+  btn.disabled = (count === 0 && !hasRequiredTypo);
   document.getElementById('sendCount').textContent = count > 0 ? count : '';
 }
 
@@ -1390,9 +1628,15 @@ function removeColor(hex) {
 
 function clearAll() {
   selected = {};
-  selectedTypo = null;
+  selectedFonts = {};
   document.querySelectorAll('.color-cell.selected').forEach(c => c.classList.remove('selected'));
-  document.querySelectorAll('.typo-card.selected').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.font-card.selected').forEach(c => c.classList.remove('selected'));
+  TYPO_ROLES.forEach(r => {
+    updateRoleBadge(r.id);
+    const section = document.getElementById('role-section-' + r.id);
+    if (section) section.classList.remove('role-complete');
+  });
+  updateTypoProgress();
   updateBar();
 }
 
@@ -1400,10 +1644,10 @@ function clearAll() {
 function openModal() {
   const keys = Object.keys(selected);
   const name = document.getElementById('clientName').value.trim();
-  const hasTypo = selectedTypo !== null;
+  const hasAnyTypo = Object.keys(selectedFonts).length > 0;
 
   document.getElementById('modalSubtitle').textContent =
-    (name ? `Hola ${name}, esta` : 'Esta') + ' es tu selección. Copia el resumen y envíaselo a tu diseñador.';
+    (name ? 'Hola ' + name + ', esta' : 'Esta') + ' es tu selección. Copia el resumen y envíaselo a tu diseñador.';
 
   // Colors section
   const colorsEl = document.getElementById('modalColors');
@@ -1426,17 +1670,24 @@ function openModal() {
 
   // Typography section
   const typoSection = document.getElementById('modalTypoSection');
-  if (hasTypo) {
-    const pair = TYPO_PAIRS.find(p => p.id === selectedTypo);
+  if (hasAnyTypo) {
+    const rows = TYPO_ROLES.map(role => {
+      const font = selectedFonts[role.id];
+      return `
+        <div class="modal-typo-role-row">
+          <span class="modal-typo-role-label">${role.name.split('/')[0].trim()}</span>
+          ${font
+            ? `<span class="modal-typo-role-value">${font}</span>`
+            : `<span class="modal-typo-role-empty">${role.required ? 'Sin seleccionar' : 'No seleccionada'}</span>`
+          }
+        </div>
+      `;
+    }).join('');
+
     typoSection.innerHTML = `
       <div class="modal-typo-section">
-        <div class="modal-typo-label">Tipografía seleccionada</div>
-        <div class="modal-typo-pair-name">${pair.name}</div>
-        <div class="modal-typo-detail">
-          <span>Títulos: <strong style="color:var(--text)">${pair.headingFont}</strong></span>
-          <span>Cuerpo: <strong style="color:var(--text)">${pair.bodyFont}</strong></span>
-          <span>Estilo: ${pair.style}</span>
-        </div>
+        <div class="modal-typo-label">Tipografias seleccionadas</div>
+        <div class="modal-typo-roles">${rows}</div>
       </div>
     `;
   } else {
@@ -1466,30 +1717,42 @@ function copyResumen() {
   const note   = document.getElementById('clientNote').value.trim();
   const keys   = Object.keys(selected);
   const date   = new Date().toLocaleDateString('es-CO', { day:'2-digit', month:'long', year:'numeric' });
-  const hasTypo = selectedTypo !== null;
+  const hasAnyTypo = Object.keys(selectedFonts).length > 0;
 
-  let text = `🎨 SELECCIÓN DE DISEÑO\n`;
-  if (name) text += `Cliente: ${name}\n`;
-  text += `Fecha: ${date}\n`;
+  let text = '🎨 SELECCION DE DISEÑO\n';
+  if (name) text += 'Cliente: ' + name + '\n';
+  text += 'Fecha: ' + date + '\n';
 
   if (keys.length > 0) {
-    text += `\nColores elegidos (${keys.length}):\n`;
+    text += '\nColores elegidos (' + keys.length + '):\n';
     keys.forEach((hex, i) => {
-      text += `  ${i+1}. ${hex}  (${selected[hex]})\n`;
+      text += '  ' + (i+1) + '. ' + hex + '  (' + selected[hex] + ')\n';
     });
   }
 
-  if (hasTypo) {
-    const pair = TYPO_PAIRS.find(p => p.id === selectedTypo);
-    text += `\n✍️ TIPOGRAFÍA SELECCIONADA\n`;
-    text += `Par: ${pair.name}\n`;
-    text += `  • Títulos: ${pair.headingFont}\n`;
-    text += `  • Cuerpo: ${pair.bodyFont}\n`;
-    text += `  • Estilo: ${pair.style}\n`;
+  if (hasAnyTypo) {
+    text += '\n✍️ TIPOGRAFIAS SELECCIONADAS\n';
+    const labels = {
+      logo:    'Logo/Marca',
+      titulos: 'Titulos',
+      cuerpo:  'Cuerpo',
+      acento:  'Acento',
+      ui:      'UI/Interfaz'
+    };
+    TYPO_ROLES.forEach(role => {
+      const font = selectedFonts[role.id];
+      const label = labels[role.id] || role.name;
+      const padded = label.padEnd(14);
+      if (font) {
+        text += '  • ' + padded + font + '\n';
+      } else if (!role.required) {
+        text += '  • ' + padded + '(no seleccionada)\n';
+      }
+    });
   }
 
-  if (note) text += `\nComentarios: ${note}`;
-  text += `\n\n— Enviado desde el selector de colores`;
+  if (note) text += '\nComentarios: ' + note;
+  text += '\n\n— Enviado desde el selector de colores';
 
   try { navigator.clipboard.writeText(text); } catch(e){}
   showToast('¡Resumen copiado! Pégalo en WhatsApp o correo.');
